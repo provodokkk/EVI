@@ -1,9 +1,6 @@
 # EVI
 
 ## Table of Contents
-- [**Introduction to GitHub**](#introduction-to-github)
-    - [Key Terms](#key-terms)
-    - [Working with Branches](#working-with-branches)
 - [**Useful Links for Prompt Engineering**](#useful-links-for-prompt-engineering)
 - [**Best Practices for Crafting Prompts**](#best-practices-for-crafting-prompts)
     - [EVI Overview](#evi-overview)
