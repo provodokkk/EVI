@@ -25,7 +25,11 @@ const Messages = forwardRef<
       (msg) => msg.type === "user_message"
     );
 
-    if (latestUserMessage) {
+    if (
+      latestUserMessage &&
+      "models" in latestUserMessage &&
+      latestUserMessage.models?.prosody
+    ) {
       // Extract emotion scores
       const emotionScores =
         (latestUserMessage.models.prosody?.scores as EmotionScores) ?? null;
