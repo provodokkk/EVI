@@ -7,7 +7,7 @@ export const Nav = () => {
   return (
     <div
       className={
-        "p-10 flex items-center h-30 bg-transparent fixed top-0 left-0 w-full z-20"
+        "px-10 py-4 flex items-center h-30 fixed top-0 left-0 w-full z-20 bg-white/10 backdrop-blur-lg"
       }
     >
       <div className="flex items-center">

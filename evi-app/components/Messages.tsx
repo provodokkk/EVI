@@ -47,7 +47,7 @@ const Messages = forwardRef<
       className="grow rounded-md overflow-auto p-4"
       ref={ref}
     >
-      <motion.div className="max-w-2xl mx-auto w-full flex flex-col gap-4 pb-24">
+      <motion.div className="max-w-2xl mx-auto w-full flex flex-col gap-4 pb-24 mt-6">
         {messages.map((msg, index) =>
           msg.type === "user_message" || msg.type === "assistant_message" ? (
             <motion.div

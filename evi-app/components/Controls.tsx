@@ -29,7 +29,7 @@ export default function Controls() {
     <div
       className={cn(
         "fixed bottom-0 left-0 w-full flex items-center justify-center z-10",
-        "bg-white/10 backdrop-blur-lg shadow-lg"
+        "bg-white/10 backdrop-blur-lg"
       )}
     >
       <AnimatePresence>
@@ -63,7 +63,7 @@ export default function Controls() {
               variant="destructive"
             >
               <Phone
-                className="size-5 opacity-50"
+                className="size-5 "
                 strokeWidth={2}
                 stroke="currentColor"
               />
