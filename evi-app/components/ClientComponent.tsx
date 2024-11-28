@@ -66,6 +66,10 @@ const openProduct = (message: any, send: any) => {
   const productList = JSON.parse(localStorage.getItem("productList") || "[]");
   const { productIndex } = JSON.parse(message.parameters);
 
+  console.log(productList)
+  console.error(productIndex)
+  console.error(productList[productIndex])
+
   if (productList[productIndex]?.productUrl) {
     window.open(productList[productIndex].productUrl, "_blank");
     return send.success({ message: "Opening the product" });

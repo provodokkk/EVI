@@ -30,6 +30,8 @@ async function handleRequest(request: Request) {
     const responseMessage = generateResponseMessage(result, emotionScores);
     const products = result.data?.products || [];
 
+    console.error(responseMessage)
+
     if (result.data) {
       result.data.products = addMockDataToProducts(products, searchTerm);
       console.log(result.data.products);

@@ -32,8 +32,7 @@
             "description": "The CO2 emissions associated with the product"
           }
         },
-        "required": ["link", "imageUrl", "price", "description"],
-        "additionalProperties": false
+        "required": ["link", "imageUrl", "price", "description"]
       },
       "description": "An array of objects containing product links, image URLs, prices, and descriptions"
     }

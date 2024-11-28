@@ -43,9 +43,9 @@ export function getPromptAdditions(searchTerm: string): string {
   const lowerCaseTerm = searchTerm.toLowerCase();
 
   try {
-    if (lowerCaseTerm.includes("batter")) {
+    if (lowerCaseTerm.includes("batter") || lowerCaseTerm.includes("umbrella") || lowerCaseTerm.includes("light bulb") || lowerCaseTerm.includes("lightbulb")) {
       return readFileSync("non-empathic_consultand_additions.txt", "utf-8");
-    } else if (lowerCaseTerm.includes("candle")) {
+    } else if (lowerCaseTerm.includes("candle") || lowerCaseTerm.includes("perfume") || (lowerCaseTerm.includes("chocolate") && lowerCaseTerm.includes("hazelnut"))) {
       return readFileSync("empathic_consultand_additions.txt", "utf-8");
     } else {
       throw new Error("No matching keyword found in the search term.");
@@ -59,64 +59,16 @@ export function getPromptAdditions(searchTerm: string): string {
 export function getEmotionalMessages(
   emotionScores: Array<{ emotion: string; value: number }>
 ): string {
-  const positiveEmotions = new Set([
-    "Admiration",
-    "Adoration",
-    "Aesthetic Appreciation",
-    "Amusement",
-    "Calmness",
-    "Contentment",
-    "Determination",
-    "Ecstasy",
-    "Entrancement",
-    "Excitement",
-    "Interest",
-    "Joy",
-    "Love",
-    "Nostalgia",
-    "Pride",
-    "Realization",
-    "Relief",
-    "Satisfaction",
-    "Surprise (positive)",
-    "Triumph",
-  ]);
-
   const highestEmotion = emotionScores[0];
-  const emotionType = positiveEmotions.has(highestEmotion.emotion)
-    ? "positive"
-    : "negative";
 
-  const additionalMessage = getAdditionalMessageBeforeConfirmation(
-    highestEmotion.value,
-    emotionType === "positive"
-  );
-  const primaryMessage = `The highest emotion is ${highestEmotion.emotion}`;
+  let additionalMessage = "";
+  if (highestEmotion.value > 0.2) {
+    additionalMessage = "Hey, just popping in to remind you: your wallet called. It said, \"Help me, I'm drowning!\"";
+  }
 
   return `
 <additional_instructions>
-YOU MUST SAY:
-- before confirmation: ${additionalMessage}
-- after confirmation: ${primaryMessage}
+Only after user chose the product you must say: "${additionalMessage}". (NOT BEFORE!)
+Then ask user: "Do you want me to open the link for the product?".
 </additional_instructions>`;
-}
-
-// Helper function to select additional message
-function getAdditionalMessageBeforeConfirmation(
-  value: number,
-  isPositive: boolean
-): string {
-  const messages = isPositive
-    ? [
-        { threshold: 0.3, message: "Retail therapy is tempting, but have you tried yelling into a pillow? Cheaper and oddly satisfying!", },
-        { threshold: 0.2, message: "Spending spree alert! Maybe take a walk before checking out.", },
-        { threshold: 0.1, message: "Hey there, shopaholic! Your cart's looking lively today.", },
-      ]
-    : [
-        { threshold: 0.3, message: "Are you buying this because you're mad at someone? Breathe first.", },
-        { threshold: 0.2, message: "Shopping out of stress? Consider a moment of mindfulness.", },
-        { threshold: 0.1, message: "Feeling low? A quick workout might boost your mood instead!", },
-      ];
-
-  return messages.find(({ threshold }) => value > threshold)?.message || "";
 }
