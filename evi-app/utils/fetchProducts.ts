@@ -71,13 +71,12 @@ export const fetchProducts = async (
 
     // Extract product information
     const products: ProductInfo[] = items
-      .map((item: any) => ({
-        imageUrl: item.galleryURL?.[0] || "https://via.placeholder.com/150",
-        linkText: "Explore Product",
+      .map((item: any, index: number) => ({
+        index: index,
         productUrl: item.viewItemURL?.[0] || "",
         price: item.sellingStatus?.[0]?.currentPrice?.[0]?.__value__ || "N/A",
       }))
-      .filter((product: ProductInfo) => product.imageUrl && product.productUrl);
+      .filter((product: ProductInfo) => product.productUrl);
 
     return {
       success: true,

@@ -1,10 +1,10 @@
 {
   "type": "object",
-  "required": ["productIndex"],
+  "required": ["productLink"],
   "properties": {
-    "productIndex": {
-      "type": "integer",
-      "description": "The index of the product in the list that the user wants to open"
+    "productLink": {
+      "type": "string",
+      "description": "The URL of the product page"
     }
   }
 }

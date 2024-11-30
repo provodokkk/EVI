@@ -63,15 +63,16 @@ const fetchProducts = async (message: any, send: any) => {
 };
 
 const openProduct = (message: any, send: any) => {
-  const productList = JSON.parse(localStorage.getItem("productList") || "[]");
-  const { productIndex } = JSON.parse(message.parameters);
-
-  console.log(productList)
-  console.error(productIndex)
-  console.error(productList[productIndex])
-
-  if (productList[productIndex]?.productUrl) {
-    window.open(productList[productIndex].productUrl, "_blank");
+  let productLink: string | null = null;
+  try {
+    const parsedParams = JSON.parse(message.parameters);
+    productLink = parsedParams.productLink;
+  } catch (error) {
+    return sendError(send, ERROR_MESSAGES.productNotFound);
+  }
+  
+  if (productLink) {
+    window.open(productLink, "_blank");
     return send.success({ message: "Opening the product" });
   }
 

@@ -66,9 +66,16 @@ export function getEmotionalMessages(
     additionalMessage = "Hey, just popping in to remind you: your wallet called. It said, \"Help me, I'm drowning!\"";
   }
 
-  return `
+  const additional_instructions = `
 <additional_instructions>
 Only after user chose the product you must say: "${additionalMessage}". (NOT BEFORE!)
 Then ask user: "Do you want me to open the link for the product?".
+</additional_instructions>` 
+  ? additionalMessage 
+  : `
+<additional_instructions>
+Only after user chose the product you must ask user: "Do you want me to open the link for the product?".
 </additional_instructions>`;
+
+  return additional_instructions;
 }
